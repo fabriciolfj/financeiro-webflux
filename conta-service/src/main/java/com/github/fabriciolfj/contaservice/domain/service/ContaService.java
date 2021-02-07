@@ -4,8 +4,7 @@ import com.github.fabriciolfj.contaservice.api.dto.mapper.ContaMapper;
 import com.github.fabriciolfj.contaservice.api.dto.request.ContaRequest;
 import com.github.fabriciolfj.contaservice.api.dto.response.ContaResponse;
 
-import com.github.fabriciolfj.contaservice.api.exceptions.ContaNotExistsException;
-import com.github.fabriciolfj.contaservice.api.exceptions.ListaContaException;
+import com.github.fabriciolfj.contaservice.api.exceptions.DomainBusinessException;
 import com.github.fabriciolfj.contaservice.domain.entity.Conta;
 import com.github.fabriciolfj.contaservice.domain.repository.ContaRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +42,7 @@ public class ContaService {
                 .findAll()
                 .flatMap(this::getContaResponse)
                 .doOnError(t -> {
-                    throw new ListaContaException("Falha ao listar as contas. Detalhes: " + t.getMessage());
+                    throw new DomainBusinessException("Falha ao listar as contas. Detalhes: " + t.getMessage());
                 });
     }
 
@@ -51,7 +50,7 @@ public class ContaService {
     public Mono<ContaResponse> findNumero(final String numero) {
         return contaRepository.findByNumero(numero)
                 .flatMap(this::getContaResponse)
-                .switchIfEmpty(Mono.error(new ContaNotExistsException("Conta não encontrada para o numero: " + numero)));
+                .switchIfEmpty(Mono.error(new DomainBusinessException("Conta não encontrada para o numero: " + numero)));
     }
 
     private Mono<ContaResponse> getContaResponse(Conta conta) {

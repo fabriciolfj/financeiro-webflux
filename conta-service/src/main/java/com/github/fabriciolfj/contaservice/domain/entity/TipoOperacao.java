@@ -1,6 +1,6 @@
 package com.github.fabriciolfj.contaservice.domain.entity;
 
-import com.github.fabriciolfj.contaservice.api.exceptions.TipoOperacaoNotExistsException;
+import com.github.fabriciolfj.contaservice.api.exceptions.DomainBusinessException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -18,6 +18,6 @@ public enum TipoOperacao {
         return Stream.of(TipoOperacao.values())
                 .filter(d -> d.descricao.equals(descricao))
                 .findFirst()
-                .orElseThrow(() -> new TipoOperacaoNotExistsException("Operação inexistente para a descrição: " + descricao));
+                .orElseThrow(() -> new DomainBusinessException("Operação inexistente para a descrição: " + descricao));
     }
 }

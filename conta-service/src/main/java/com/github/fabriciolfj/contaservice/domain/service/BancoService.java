@@ -1,6 +1,6 @@
 package com.github.fabriciolfj.contaservice.domain.service;
 
-import com.github.fabriciolfj.contaservice.api.exceptions.BancoNotExistsException;
+import com.github.fabriciolfj.contaservice.api.exceptions.DomainBusinessException;
 import com.github.fabriciolfj.contaservice.domain.entity.Banco;
 import com.github.fabriciolfj.contaservice.domain.repository.BancoRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class BancoService {
         return bancoRepository.findByCode(code)
                 .doOnError(t -> {
                     log.info("Banco não encontrado para o code {}. Detalhes: ", code, t.getCause());
-                    new BancoNotExistsException("Banco não encontrado para code: " + code);
+                    new DomainBusinessException("Banco não encontrado para code: " + code);
                 });
     }
 
@@ -27,7 +27,7 @@ public class BancoService {
         return bancoRepository.findById(id)
                 .doOnError(t -> {
                     log.info("Banco não encontrado para o id {}. Detalhes: ", id, t.getCause());
-                    new BancoNotExistsException("Banco não encontrado para o id: " + id);
+                    new DomainBusinessException("Banco não encontrado para o id: " + id);
                 });
     }
 }
