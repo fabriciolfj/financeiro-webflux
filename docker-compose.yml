@@ -1,0 +1,51 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:12.2
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+        
+  zookeeper:
+    image: zookeeper:3.6.1
+    container_name: zookeeper2
+    restart: always
+    networks:
+      - kafka-net
+    ports:
+      - "2181:2181"
+    volumes:
+      - /zookeeper:/bitnami/zookeeper
+
+  kafka:
+    image: wurstmeister/kafka:2.12-2.5.0
+    container_name: kafka2
+    restart: always
+    networks:
+      - kafka-net
+    ports:
+      - "9092:9092"
+    volumes:
+      - /kafka:/bitnami/kafka
+    environment:
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: DOCKER_INTERNAL:PLAINTEXT,DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_LISTENERS: DOCKER_INTERNAL://:29092,DOCKER_EXTERNAL://:9092
+      KAFKA_ADVERTISED_LISTENERS: DOCKER_INTERNAL://kafka:29092,DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER_INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+networks:
+  kafka-net:
+    name: kafka-net
+    driver: bridge      

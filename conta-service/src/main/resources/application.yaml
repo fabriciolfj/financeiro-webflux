@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: conta-service
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/test
+    username: root
+    password: root
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+  redis:
+    host: localhost
+    port: 6379
