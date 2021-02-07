@@ -2,6 +2,7 @@ package com.github.fabriciolfj.contaservice.domain.service;
 
 import com.github.fabriciolfj.contaservice.domain.entity.Conta;
 import com.github.fabriciolfj.contaservice.domain.entity.Extrato;
+import com.github.fabriciolfj.contaservice.domain.entity.TipoOperacao;
 import com.github.fabriciolfj.contaservice.domain.facade.create.ExtratoCreate;
 import com.github.fabriciolfj.contaservice.domain.repository.ExtratoRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,8 @@ public class ExtratoService {
     private final ExtratoCreate create;
 
     public Mono<Extrato> saveAbertura(final Conta conta, final BigDecimal valor) {
-        return Mono.just(create.abertura(conta, valor))
-                .flatMap(ex -> extratoRepository.save(ex))
-                .log();
+        return extratoRepository.findExtrato(conta.getId(), TipoOperacao.ABERTURA.getDescricao())
+                .switchIfEmpty(Mono.defer(() -> Mono.just(create.abertura(conta, valor))
+                        .flatMap(ex -> extratoRepository.save(ex))));
     }
 }

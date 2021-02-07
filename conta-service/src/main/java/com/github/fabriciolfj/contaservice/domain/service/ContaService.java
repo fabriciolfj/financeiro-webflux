@@ -24,12 +24,17 @@ public class ContaService {
     private final ContaMapper contaMapper;
 
     public Mono<Conta> save(final ContaRequest request) {
+        return contaRepository.findByNumero(request.getNumero())
+                .switchIfEmpty(Mono.defer(() -> createConta(request)));
+    }
+
+    private Mono<Conta> createConta(ContaRequest request) {
         return bancoService.findByCode(request.getCodeBanco())
                 .map(b -> {
                     var conta = contaMapper.toEntity(request);
                     conta.setBanco(b.getId());
                     return conta;
-                }).flatMap(c -> contaRepository.save(c))
+                }).flatMap(c -> contaRepository.save(c).log())
                 .log();
     }
 
@@ -41,6 +46,7 @@ public class ContaService {
                     throw new ListaContaException("Falha ao listar as contas. Detalhes: " + t.getMessage());
                 });
     }
+
 
     public Mono<ContaResponse> findNumero(final String numero) {
         return contaRepository.findByNumero(numero)
