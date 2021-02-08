@@ -17,7 +17,7 @@ public class AberturaContaService {
     private final ContaService contaService;
     private final ExtratoService extratoService;
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional("connectionFactoryTransactionManager")
     public Mono<AberturaResponse> execute(final ContaRequest request) {
         return contaService.save(request)
                 .flatMap(c -> {
