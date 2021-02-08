@@ -5,8 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -15,14 +14,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Table("extrato")
+@Document("extrato")
 public class Extrato {
 
     @Id
-    @Column("id")
-    private Long id;
-    @Column("conta_id")
-    private Long conta;
+    private String id;
+    private String conta;
     private LocalDateTime data;
     private String operacao;
     private BigDecimal valor;

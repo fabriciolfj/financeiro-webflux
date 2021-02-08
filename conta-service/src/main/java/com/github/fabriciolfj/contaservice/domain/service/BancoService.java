@@ -23,7 +23,7 @@ public class BancoService {
                 });
     }
 
-    public Mono<Banco> findById(final Long id) {
+    public Mono<Banco> findById(final String id) {
         return bancoRepository.findById(id)
                 .doOnError(t -> {
                     log.info("Banco não encontrado para o id {}. Detalhes: ", id, t.getCause());

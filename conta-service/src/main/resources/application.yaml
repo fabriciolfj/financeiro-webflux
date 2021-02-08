@@ -1,10 +1,10 @@
 spring:
   application:
     name: conta-service
-  r2dbc:
-    url: r2dbc:postgresql://localhost:5432/test
-    username: root
-    password: root
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
   redis:
     host: localhost
     port: 6379
@@ -12,34 +12,20 @@ spring:
     function:
       definition: limite
     stream:
-      source: limite
-      binders:
-        kafka:
-          type: kafka
       bindings:
         limite-out-0:
           destination: limite-topic
           content-type: application/json
-      kafka:
-        input-estoque:
-          destination: limite-topic
-          group: '${spring.application.name}'
-          consumer:
-            autoCommitOffset: true
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
       group-id: ${spring.application.name}
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       auto-offset-reset: earliest
       enable-auto-commit: false
     listener:
       missing-topics-fatal: false
       ack-mode: MANUAL_IMMEDIATE
     producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
       retries: 3
       client-id: ${spring.application.name}
       transaction-id-prefix: ted

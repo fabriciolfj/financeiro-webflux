@@ -46,15 +46,14 @@ public class ContaService {
                 });
     }
 
-
     public Mono<ContaResponse> findNumero(final String numero) {
         return contaRepository.findByNumero(numero)
                 .flatMap(this::getContaResponse)
-                .switchIfEmpty(Mono.error(new DomainBusinessException("Conta não encontrada para o numero: " + numero)));
+                .switchIfEmpty(Mono.defer(() -> Mono.error(new DomainBusinessException("Conta não encontrada para o numero: " + numero))));
     }
 
     private Mono<ContaResponse> getContaResponse(Conta conta) {
-        return bancoService.findById(conta.getId())
+        return bancoService.findById(conta.getBanco())
                 .map(b -> {
                     log.info("Banco localizado: {}", b.toString());
                     var response = contaMapper.toResponse(conta);

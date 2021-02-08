@@ -5,8 +5,6 @@ import com.github.fabriciolfj.contaservice.api.dto.response.AberturaResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -17,7 +15,6 @@ public class AberturaContaService {
     private final ContaService contaService;
     private final ExtratoService extratoService;
 
-    @Transactional("connectionFactoryTransactionManager")
     public Mono<AberturaResponse> execute(final ContaRequest request) {
         return contaService.save(request)
                 .flatMap(c -> {

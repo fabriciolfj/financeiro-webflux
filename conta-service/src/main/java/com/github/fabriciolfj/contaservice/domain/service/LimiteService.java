@@ -5,7 +5,6 @@ import com.github.fabriciolfj.contaservice.domain.facade.create.AtualizarContaCr
 import com.github.fabriciolfj.contaservice.domain.integracao.message.producer.LimiteProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -16,7 +15,6 @@ public class LimiteService {
     private final ContaService contaService;
     private final LimiteProducer limiteProducer;
 
-    @Transactional("kafkaTransactionManager")
     public Mono<Void> process(final String conta, final LimiteRequest request) {
         return contaService.findNumero(conta)
                 .flatMap(c  ->  atualizarContaCreate.execute(request, c.getNumero()))

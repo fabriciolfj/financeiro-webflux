@@ -5,20 +5,18 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("banco")
+@Document("banco")
 public class Banco {
 
     @Id
-    @Column("id")
     @EqualsAndHashCode.Include
-    private Long id;
+    private String id;
     private String code;
     private String descricao;
 }

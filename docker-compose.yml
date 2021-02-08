@@ -1,13 +1,16 @@
 version: "3.8"
 services:
-  postgres:
-    image: postgres:12.2
-    environment:
-      POSTGRES_DB: test
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
+  mongodb:
+    image: mongo:3.6.9
+    mem_limit: 350m
     ports:
-      - "5432:5432"
+      - "27017:27017"
+    command: mongod --smallfiles
+    healthcheck:
+      test: "mongo --eval 'db.stats().ok'"
+      interval: 10s
+      timeout: 5s
+      retries: 10
         
   zookeeper:
     image: zookeeper:3.6.1

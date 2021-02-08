@@ -20,18 +20,17 @@ public class LimiteProducer {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private static final String TOPIC_LIMITE = "limite-topic";
+    private static final String TOPIC_LIMITE = "limite-out-0";
 
-    @Transactional("chainedTransactionManager")
     public Mono<Void> process(final AtualizarContaDTO atualizarContaDTO)  {
         try {
             log.info("Enviando a mensagem para o serviço limite: {}", atualizarContaDTO);
-            var json = objectMapper.writeValueAsString(atualizarContaDTO);
-            var msg = MessageBuilder.withPayload(json)
-                    .build();
+            final var json = objectMapper.writeValueAsString(atualizarContaDTO);
+            final var msg = MessageBuilder.withPayload(json).build();
             streamBridge.send(TOPIC_LIMITE, msg);
             return Mono.empty();
         } catch (Exception e) {
+            log.error(e.getMessage());
             return Mono.error(new DomainBusinessException("Falha no envio da mensagem para o topic: " + TOPIC_LIMITE));
         }
     }

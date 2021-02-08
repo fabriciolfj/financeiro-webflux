@@ -21,7 +21,7 @@ public class ExtratoService {
     private final ExtratoCreate create;
 
     public Mono<Extrato> saveAbertura(final Conta conta, final BigDecimal valor) {
-        return extratoRepository.findExtrato(conta.getId(), TipoOperacao.ABERTURA.getDescricao())
+        return extratoRepository.findByContaAndOperacao(conta.getId(), TipoOperacao.ABERTURA.getDescricao())
                 .switchIfEmpty(Mono.defer(() -> Mono.just(create.abertura(conta, valor))
                         .flatMap(ex -> extratoRepository.save(ex))));
     }
