@@ -7,7 +7,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Objects;
 
 @ResponseStatus(code = HttpStatus.UNPROCESSABLE_ENTITY)
-public class DomainBusinessException extends ResponseStatusException {
+public class DomainBusinessException extends ResponseStatusException{
 
 
     private String message;

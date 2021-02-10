@@ -2,6 +2,7 @@ package com.github.fabriciolfj.contaservice.domain.service;
 
 import com.github.fabriciolfj.contaservice.api.dto.request.ContaRequest;
 import com.github.fabriciolfj.contaservice.api.dto.response.AberturaResponse;
+import com.github.fabriciolfj.contaservice.api.exceptions.DomainBusinessException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

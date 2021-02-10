@@ -17,17 +17,11 @@ public class BancoService {
 
     public Mono<Banco> findByCode(final String code) {
         return bancoRepository.findByCode(code)
-                .doOnError(t -> {
-                    log.info("Banco não encontrado para o code {}. Detalhes: ", code, t.getCause());
-                    new DomainBusinessException("Banco não encontrado para code: " + code);
-                });
+                .switchIfEmpty(Mono.error(new DomainBusinessException("Banco não encontrado para code: " + code)));
     }
 
     public Mono<Banco> findById(final String id) {
         return bancoRepository.findById(id)
-                .doOnError(t -> {
-                    log.info("Banco não encontrado para o id {}. Detalhes: ", id, t.getCause());
-                    new DomainBusinessException("Banco não encontrado para o id: " + id);
-                });
+                .switchIfEmpty(Mono.error(new DomainBusinessException("Banco não encontrado para o id: " + id)));
     }
 }
