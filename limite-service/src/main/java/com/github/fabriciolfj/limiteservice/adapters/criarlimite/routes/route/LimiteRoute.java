@@ -1,11 +1,11 @@
-package com.github.fabriciolfj.limiteservice.adapters.routes.limite.route;
+package com.github.fabriciolfj.limiteservice.adapters.criarlimite.routes.route;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.RouterFunction;
-import com.github.fabriciolfj.limiteservice.adapters.routes.limite.handler.LimiteHandler;
+import com.github.fabriciolfj.limiteservice.adapters.criarlimite.routes.handler.LimiteHandler;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;

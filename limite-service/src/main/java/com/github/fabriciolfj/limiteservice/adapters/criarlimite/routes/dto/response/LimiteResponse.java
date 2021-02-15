@@ -1,4 +1,4 @@
-package com.github.fabriciolfj.limiteservice.adapters.routes.limite.dto.response;
+package com.github.fabriciolfj.limiteservice.adapters.criarlimite.routes.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

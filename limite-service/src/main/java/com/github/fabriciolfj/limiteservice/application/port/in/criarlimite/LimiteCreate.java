@@ -5,5 +5,5 @@ import reactor.core.publisher.Mono;
 
 public interface LimiteCreate {
 
-    Mono<Limite> execute(final Limite limite);
+    Mono<?> execute(final Limite limite);
 }

@@ -1,4 +1,4 @@
-package com.github.fabriciolfj.contaservice.api.exceptions;
+package com.github.fabriciolfj.limiteservice.adapters.exceptions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;

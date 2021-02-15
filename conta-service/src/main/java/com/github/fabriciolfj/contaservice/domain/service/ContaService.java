@@ -52,6 +52,11 @@ public class ContaService {
                 .switchIfEmpty(Mono.defer(() -> Mono.error(new DomainBusinessException("Conta não encontrada para o numero: " + numero))));
     }
 
+    public Mono<Conta> findConta(final String numero) {
+        return contaRepository.findByNumero(numero)
+                .switchIfEmpty(Mono.defer(() -> Mono.error(new DomainBusinessException("Conta não encontrada para o numero: " + numero))));
+    }
+
     private Mono<ContaResponse> getContaResponse(Conta conta) {
         return bancoService.findById(conta.getBanco())
                 .map(b -> {
