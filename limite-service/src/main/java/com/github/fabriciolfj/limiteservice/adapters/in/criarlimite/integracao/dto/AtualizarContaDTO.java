@@ -1,4 +1,4 @@
-package com.github.fabriciolfj.limiteservice.adapters.criarlimite.integracao.dto;
+package com.github.fabriciolfj.limiteservice.adapters.in.criarlimite.integracao.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

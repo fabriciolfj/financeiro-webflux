@@ -1,27 +1,25 @@
-package com.github.fabriciolfj.limiteservice.adapters.criarlimite.integracao;
+package com.github.fabriciolfj.limiteservice.adapters.in.criarlimite.integracao;
 
-import com.github.fabriciolfj.limiteservice.adapters.criarlimite.integracao.dto.AtualizarContaDTO;
-import com.github.fabriciolfj.limiteservice.adapters.criarlimite.mapper.LimiteMapper;
-import com.github.fabriciolfj.limiteservice.application.domain.criarlimite.LimiteService;
+import com.github.fabriciolfj.limiteservice.adapters.in.criarlimite.integracao.dto.AtualizarContaDTO;
+import com.github.fabriciolfj.limiteservice.adapters.in.criarlimite.mapper.LimiteMapper;
+import com.github.fabriciolfj.limiteservice.application.port.in.criarlimite.LimiteCreate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class AtualizarSaque {
+public class ContaLimiteConsumer {
 
-    private final LimiteService limiteService;
+    private final LimiteCreate limiteCreate;
     private final LimiteMapper mapper;
     private Scheduler scheduler = Schedulers.fromExecutor(Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()));
 
@@ -37,7 +35,7 @@ public class AtualizarSaque {
         Mono.fromCallable(() -> mapper.toDocument(value))
                 .subscribeOn(scheduler)
                 .publishOn(Schedulers.boundedElastic())
-                .flatMap(doc -> limiteService.execute(doc))
+                .flatMap(doc -> limiteCreate.execute(doc))
                 .doOnError(e ->  log.error("Falha ao salvar o limite {}, detalhes {}", value, e.getMessage()))
         .subscribe();
     }

@@ -1,4 +1,4 @@
-package com.github.fabriciolfj.limiteservice.adapters.criarlimite.routes.dto.request;
+package com.github.fabriciolfj.limiteservice.adapters.in.criarlimite.routes.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

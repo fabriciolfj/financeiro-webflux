@@ -1,7 +1,7 @@
-package com.github.fabriciolfj.limiteservice.adapters.criarlimite.routes.handler;
+package com.github.fabriciolfj.limiteservice.adapters.in.criarlimite.routes.handler;
 
-import com.github.fabriciolfj.limiteservice.adapters.criarlimite.routes.dto.request.LimiteRequest;
-import com.github.fabriciolfj.limiteservice.adapters.criarlimite.mapper.LimiteMapper;
+import com.github.fabriciolfj.limiteservice.adapters.in.criarlimite.routes.dto.request.LimiteRequest;
+import com.github.fabriciolfj.limiteservice.adapters.in.criarlimite.mapper.LimiteMapper;
 import com.github.fabriciolfj.limiteservice.application.domain.document.Limite;
 import com.github.fabriciolfj.limiteservice.application.port.in.criarlimite.LimiteCreate;
 import com.github.fabriciolfj.limiteservice.infra.commons.ErrorResponse;

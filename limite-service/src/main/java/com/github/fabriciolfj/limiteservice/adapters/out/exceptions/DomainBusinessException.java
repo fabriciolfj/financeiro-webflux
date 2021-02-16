@@ -1,4 +1,4 @@
-package com.github.fabriciolfj.limiteservice.adapters.exceptions;
+package com.github.fabriciolfj.limiteservice.adapters.out.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

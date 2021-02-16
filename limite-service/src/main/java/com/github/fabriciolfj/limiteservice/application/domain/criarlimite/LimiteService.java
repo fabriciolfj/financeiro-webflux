@@ -1,6 +1,6 @@
 package com.github.fabriciolfj.limiteservice.application.domain.criarlimite;
 
-import com.github.fabriciolfj.limiteservice.adapters.exceptions.DomainBusinessException;
+import com.github.fabriciolfj.limiteservice.adapters.out.exceptions.DomainBusinessException;
 import com.github.fabriciolfj.limiteservice.application.domain.document.Limite;
 import com.github.fabriciolfj.limiteservice.application.port.in.criarlimite.LimiteCreate;
 import com.github.fabriciolfj.limiteservice.application.port.in.repository.LimiteRepository;
