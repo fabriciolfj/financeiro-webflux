@@ -1,7 +1,7 @@
 package com.github.fabriciolfj.limiteservice.application.handler;
 
 import com.github.fabriciolfj.limiteservice.application.dto.request.LimiteRequest;
-import com.github.fabriciolfj.limiteservice.adapters.in.mensageria.mapper.LimiteMapper;
+import com.github.fabriciolfj.limiteservice.adapters.mensageria.mapper.LimiteMapper;
 import com.github.fabriciolfj.limiteservice.core.document.Limite;
 import com.github.fabriciolfj.limiteservice.core.port.in.LimiteCreate;
 import com.github.fabriciolfj.limiteservice.infra.commons.ErrorResponse;

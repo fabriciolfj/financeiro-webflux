@@ -1,4 +1,4 @@
-package com.github.fabriciolfj.limiteservice.adapters.in.mensageria.dto;
+package com.github.fabriciolfj.limiteservice.adapters.mensageria.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

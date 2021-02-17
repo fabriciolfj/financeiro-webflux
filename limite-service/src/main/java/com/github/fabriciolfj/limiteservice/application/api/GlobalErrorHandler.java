@@ -1,6 +1,8 @@
-package com.github.fabriciolfj.limiteservice.core.exceptions;
+package com.github.fabriciolfj.limiteservice.application.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fabriciolfj.limiteservice.core.exceptions.DomainBusinessException;
+import com.github.fabriciolfj.limiteservice.core.exceptions.ErrorDetails;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;

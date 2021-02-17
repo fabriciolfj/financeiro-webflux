@@ -19,7 +19,7 @@ public class LimiteCreateService implements LimiteCreate {
     @Override
     public Mono<?> execute(final Limite limite) {
         log.info("Salvando o limite: {}", limite);
-        return limiteBaseOut.findConta(limite.getContaComDigito())
+        return limiteBaseOut.findByContaComDigito(limite.getContaComDigito())
                 .flatMap(r -> {
                     log.error("Limite ja cadastrado para conta: {}", limite.getContaComDigito());
                     return Mono.error(new DomainBusinessException("Limite ja cadastrado para conta: " + limite.getContaComDigito()));

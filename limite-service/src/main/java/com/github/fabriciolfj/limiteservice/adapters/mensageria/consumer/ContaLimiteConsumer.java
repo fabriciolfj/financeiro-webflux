@@ -1,7 +1,7 @@
-package com.github.fabriciolfj.limiteservice.adapters.in.mensageria.consumer;
+package com.github.fabriciolfj.limiteservice.adapters.mensageria.consumer;
 
-import com.github.fabriciolfj.limiteservice.adapters.in.mensageria.dto.AtualizarContaDTO;
-import com.github.fabriciolfj.limiteservice.adapters.in.mensageria.mapper.LimiteMapper;
+import com.github.fabriciolfj.limiteservice.adapters.mensageria.dto.AtualizarContaDTO;
+import com.github.fabriciolfj.limiteservice.adapters.mensageria.mapper.LimiteMapper;
 import com.github.fabriciolfj.limiteservice.core.port.in.LimiteCreate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

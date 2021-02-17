@@ -1,6 +1,6 @@
-package com.github.fabriciolfj.limiteservice.adapters.in.mensageria.mapper;
+package com.github.fabriciolfj.limiteservice.adapters.mensageria.mapper;
 
-import com.github.fabriciolfj.limiteservice.adapters.in.mensageria.dto.AtualizarContaDTO;
+import com.github.fabriciolfj.limiteservice.adapters.mensageria.dto.AtualizarContaDTO;
 import com.github.fabriciolfj.limiteservice.application.dto.request.LimiteRequest;
 import com.github.fabriciolfj.limiteservice.core.document.Limite;
 import org.mapstruct.Mapper;

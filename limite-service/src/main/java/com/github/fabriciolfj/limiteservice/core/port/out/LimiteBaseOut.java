@@ -6,6 +6,6 @@ import reactor.core.publisher.Mono;
 public interface LimiteBaseOut {
 
     Mono<Limite> save(final Limite limite);
-    Mono<Limite> findConta(final String conta);
+    Mono<Limite> findByContaComDigito(final String conta);
 
 }
