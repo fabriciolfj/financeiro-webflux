@@ -1,8 +1,5 @@
 package com.github.fabriciolfj.limiteservice.infra.cache;
 
-import org.redisson.Redisson;
-import org.redisson.api.RedissonClient;
-import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.cache.Cache;
@@ -21,7 +18,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisURI;
 import lombok.RequiredArgsConstructor;
-import pagseguro.emissao.cartao.conta.authorizer.domain.model.CustomerVO;
 
 
 @Configuration
@@ -54,23 +50,13 @@ public class RedisConfiguration {
                 .serializeKeysWith(
                         SerializationPair.fromSerializer(new StringRedisSerializer()))
                 .serializeValuesWith(SerializationPair
-                        .fromSerializer(new Jackson2JsonRedisSerializer<>(CustomerVO.class)));
+                        .fromSerializer(new Jackson2JsonRedisSerializer<>(String.class)));
     }
 
     @Bean
     @Qualifier(CACHE_NAME)
-    public Cache getCacheCustomer(final CacheManager cacheManager) {
+    public Cache getCacheLimits(final CacheManager cacheManager) {
         return cacheManager.getCache(CACHE_NAME);
-    }
-
-    @Bean
-    public RedissonClient redissonClient() { // used in lock
-        final Config config = new Config();
-        config
-                .useSingleServer()
-                .setAddress("redis://" + properties.getHost() + ":" + properties.getPort())
-                .setDatabase(properties.getDatabase());
-        return Redisson.create(config);
     }
 
     @Bean
