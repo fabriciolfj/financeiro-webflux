@@ -26,4 +26,17 @@ public class AberturaContaController {
     public Mono<AberturaResponse> create(@RequestBody final ContaRequest request) {
         return aberturaContaService.execute(request);
     }
+
+    /*public Mono<String> getData(String stockId) {
+        return webClient.get()
+                .uri(PATH_BY_ID, stockId)
+                .retrieve()
+                .onStatus(HttpStatus::is5xxServerError, response -> Mono.error(new ServiceException("Server error", response.rawStatusCode())))
+                .bodyToMono(String.class)
+                .retryWhen(Retry.backoff(3, Duration.ofSeconds(5)) // 3 tentativas a cara 5 segundos
+                        .filter(throwable -> throwable instanceof ServiceException) //caso de essa exceção, nao irá realizar a retentativa
+                        .onRetryExhaustedThrow((retryBackoffSpec, retrySignal) -> { //trato a exceção, caso seja um serviceexception ou as retentativas nao derem certo
+                            throw new ServiceException("External Service failed to process after max retries", HttpStatus.SERVICE_UNAVAILABLE.value());
+                        }));
+    }*/
 }
